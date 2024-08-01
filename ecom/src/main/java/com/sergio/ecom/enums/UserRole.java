@@ -1,2 +1,6 @@
-package com.sergio.ecom.enums;public enum UserRole {
+package com.sergio.ecom.enums;
+
+public enum UserRole {
+    ADMIN,
+    CUSTOMER
 }
