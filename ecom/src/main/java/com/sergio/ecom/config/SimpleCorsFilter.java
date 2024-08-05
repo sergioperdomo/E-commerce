@@ -1,5 +1,6 @@
 package com.sergio.ecom.config;
 
+import com.sergio.ecom.entity.User;
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -52,12 +53,4 @@ public class SimpleCorsFilter implements Filter {
     public void destroy() {
         Filter.super.destroy();
     }
-
-    // Método para crear la cuenta de administrador
-    public void createAdminAccount(){
-
-    }
-
-
-
 }
