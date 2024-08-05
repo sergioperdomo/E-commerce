@@ -41,4 +41,17 @@ public class AuthServiceImpl  implements AuthService{
         return  userRepository.findFirstByEmail(email).isPresent();
     }
 
+    // Método para crear la cuenta de administrador
+    public void createAdminAccount(){
+        User adminAccount = userRepository.findByRole(UserRole.ADMIN);
+        if (null == adminAccount){
+            User user = new User();
+            user.setEmail("admin@test.com");;
+            user.setName("admin");
+            user.setRole(UserRole.ADMIN);
+            user.setPassword(new BCryptPasswordEncoder().encode("admin"));
+            userRepository.save(user);
+        }
+    }
+
 }
