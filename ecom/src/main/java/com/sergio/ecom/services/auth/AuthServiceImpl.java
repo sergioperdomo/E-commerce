@@ -6,6 +6,7 @@ import com.sergio.ecom.dto.UserDto;
 import com.sergio.ecom.entity.User;
 import com.sergio.ecom.enums.UserRole;
 import com.sergio.ecom.repository.UserRepository;
+import jakarta.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -41,6 +42,7 @@ public class AuthServiceImpl  implements AuthService{
         return  userRepository.findFirstByEmail(email).isPresent();
     }
 
+    @PostConstruct
     // Método para crear la cuenta de administrador
     public void createAdminAccount(){
         User adminAccount = userRepository.findByRole(UserRole.ADMIN);
