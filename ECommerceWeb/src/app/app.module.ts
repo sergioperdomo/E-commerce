@@ -8,13 +8,14 @@ import { DemoAngularMaterialModuleTsComponent } from './DemoAngularMaterialModul
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule } from '@angular/common/http';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    // SignupComponent,
+    SignupComponent,
   ],
   imports: [
     BrowserModule,
@@ -22,7 +23,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     BrowserAnimationsModule,
     DemoAngularMaterialModuleTsComponent,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
