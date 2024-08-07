@@ -30,7 +30,7 @@ export class UserStorageService {
 
     // Almacenamos un nuevo usuario.
 
-    window.localStorage.setItem(TOKEN, JSON.stringify(user));
+    window.localStorage.setItem(USER, JSON.stringify(user));
   }
 
 
