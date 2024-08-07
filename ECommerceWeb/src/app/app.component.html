@@ -1,12 +1,47 @@
 
 <!-- Barra de navegación -->
+<div *ngIf="!isCustomerLoggedIn && !isAdminLoggedIn"> <!-- Se esta comprobando si el cliente y el administrador no ha iniciado sesión -->
 
-<mat-toolbar color="primary" class="navbar">
-  <span class="nabvar-brand" >E-Commerce</span>
-  <span class="spacer" ></span>
-  <button mat-button routerLink="/order" routerLinkActive="active">Track Order</button>
-  <button mat-button routerLink="/signup" routerLinkActive="active">Sign Up</button>
-  <button mat-button routerLink="/login" routerLinkActive="active">Longin</button>
-</mat-toolbar>
+  <mat-toolbar color="primary" class="navbar">
+    <span class="nabvar-brand" >E-Commerce</span>
+    <span class="spacer" ></span>
+    <button mat-button routerLink="/order" routerLinkActive="active">Track Order</button>
+    <button mat-button routerLink="/signup" routerLinkActive="active">Sign Up</button>
+    <button mat-button routerLink="/login" routerLinkActive="active">Longin</button>
+  </mat-toolbar>
+
+</div>
+
+<div *ngIf="isAdminLoggedIn"> <!-- Se esta comprobando si el usuario administrador ha iniciado sesión -->
+
+  <mat-toolbar color="primary" class="navbar">
+    <span class="nabvar-brand" >E-Commerce</span>
+    <span class="spacer" ></span>
+    <button mat-button routerLink="/admin/dashboard" routerLinkActive="active" >Dashboard</button>
+    <button mat-button routerLink="/admin/analytics" routerLinkActive="active" >Analytics</button>
+    <button mat-button routerLink="/admin/category" routerLinkActive="active" >Category</button>
+    <button mat-button routerLink="/admin/producto" routerLinkActive="active" >Product</button>
+    <button mat-button routerLink="/admin/orders" routerLinkActive="active" >Orders</button>
+    <button mat-button routerLink="/admin/post-coupon" routerLinkActive="active" >Post Coupon</button>
+    <button mat-button routerLink="/admin/coupons" routerLinkActive="active" >Coupons</button>
+    <button mat-button routerLinkActive="active" (click)="logout()" >Logout</button>
+  </mat-toolbar>
+
+</div>
+
+<div *ngIf="isCustomerLoggedIn"> <!-- Se esta comprobando si el cliente ha iniciado sesión -->
+
+  <mat-toolbar color="primary" class="navbar">
+    <span class="nabvar-brand" >E-Commerce</span>
+    <span class="spacer" ></span>
+    <button mat-button routerLink="/customer/dashboard" routerLinkActive="active">Dashboard</button>
+    <button mat-button routerLink="/customer/cart" routerLinkActive="active">Cart</button>
+    <button mat-button routerLink="/customer/my_orders" routerLinkActive="active">Orders</button>
+    <button mat-button routerLink="/customer/wishlist" routerLinkActive="active">Wishlist</button>
+    <button mat-button routerLink="/customer/profile" routerLinkActive="active">Profile</button>
+    <button mat-button routerLinkActive="active" (click)="logout()" >Logout</button>
+  </mat-toolbar>
+
+</div>
 
 <router-outlet></router-outlet>
