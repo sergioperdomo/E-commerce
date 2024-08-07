@@ -20,7 +20,7 @@ import java.util.function.Function;
 @Component
 public class JwtUtil {
 
-    public static final String SECRET = "eyJhbGciOiJIUzI1NiJ9.eyJSb2xlIjoiQWRtaW4iLCJJc3N1ZXIiOiJzZXJnaW8iLCJVc2VybmFtZSI6IlNlcmd5MDAiLCJleHAiOjE3MzU2NTk1MzgsImlhdCI6MTcyMjYxMzEzOH0.iKbvS9YkmhHx-xoT_xRvRBBDoQTu_XJudwnclrh1nyc\n";
+    public static final String SECRET = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IlNlcmdpbyBBbmRyZXMiLCJpYXQiOjEwMDM4MTEzMzJ95vg8lJ4dpoJGkyCDrPXhB4uiDJfaemWYEQaAm8o4";
     //eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IlNlcmdpbyBBbmRyZXMiLCJpYXQiOjEwMDM4MTEzMzJ9.5v_g8lJ-_4dpoJGkyCDrPXhB4uiDJfaemWYEQaAm8o4
 
     // Método para agregar el token.
