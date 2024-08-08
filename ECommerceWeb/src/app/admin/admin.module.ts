@@ -7,6 +7,7 @@ import { DashboradAdminComponent } from './components/dashborad-admin/dashborad-
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { DemoAngularMaterialModuleTsComponent } from '../DemoAngularMaterialModule';
+import { PostCategoryComponent } from './components/post-category/post-category.component';
 // import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 
@@ -14,6 +15,7 @@ import { DemoAngularMaterialModuleTsComponent } from '../DemoAngularMaterialModu
   declarations: [
     AdminComponent,
     DashboradAdminComponent,
+    PostCategoryComponent,
     // DashboardComponent
   ],
   imports: [
