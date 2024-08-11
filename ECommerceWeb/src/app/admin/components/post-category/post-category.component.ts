@@ -23,7 +23,7 @@ export class PostCategoryComponent {
   ngOnInit(): void {
     this.categoryForm = this.fb.group({
       name: [null, [Validators.required]],
-      description: [null, [Validators.required]],
+      description: [null, [Validators.required]]
     })
   }
 
@@ -38,7 +38,7 @@ export class PostCategoryComponent {
         } else {
           this.snackBar.open(res.message, 'Close', {
             duration: 5000,
-            panelClass: 'error-snackbar '
+            panelClass: 'error-snackbar'
           });
         }
       })
