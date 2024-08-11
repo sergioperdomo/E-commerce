@@ -1,2 +1,10 @@
-package com.sergio.ecom.repository;public class ProductRepository {
+package com.sergio.ecom.repository;
+
+
+import com.sergio.ecom.entity.Product;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface ProductRepository  extends JpaRepository<Product,Long> {
 }
