@@ -41,6 +41,9 @@ export class LoginComponent {
 
     this.authService.login(username, password).subscribe(
       (res) => {
+
+        this.snackbar.open('Login Success', 'OK', { duration: 5000})
+
         if (UserStorageService.isAdminLoggedIn()){
           this.router.navigateByUrl('admin/dashboard');
         }
