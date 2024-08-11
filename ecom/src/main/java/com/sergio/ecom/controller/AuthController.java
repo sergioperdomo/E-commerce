@@ -1,6 +1,6 @@
 package com.sergio.ecom.controller;
 
-import com.fasterxml.jackson.databind.util.JSONPObject;
+
 import com.sergio.ecom.dto.AuthenticationRequest;
 import com.sergio.ecom.dto.SignupRequest;
 import com.sergio.ecom.dto.UserDto;
@@ -10,7 +10,7 @@ import com.sergio.ecom.services.auth.AuthService;
 import com.sergio.ecom.utils.JwtUtil;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
-import org.apache.coyote.Response;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.springframework.http.HttpStatus;
@@ -38,7 +38,7 @@ public class AuthController {
     private final UserRepository userRepository;
     private final JwtUtil jwtUtil;
 
-    public static final String TOKEN_PREFIX = "Bearer";
+    public static final String TOKEN_PREFIX = "Bearer ";
     public static final String HEADER_STRING = "Authorization";
 
     private final AuthService authService;
