@@ -3,14 +3,13 @@ package com.sergio.ecom.utils;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.io.Decoder;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
-import org.hibernate.query.NativeQuery;
+import org.aspectj.apache.bcel.classfile.annotation.RuntimeAnnos;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
-
 import java.security.Key;
+import java.security.SecureRandom;
 import java.util.Base64;
 import java.util.Date;
 import java.util.HashMap;
@@ -20,8 +19,9 @@ import java.util.function.Function;
 @Component
 public class JwtUtil {
 
-    public static final String SECRET = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IlNlcmdpbyBBbmRyZXMiLCJpYXQiOjEwMDM4MTEzMzJ95vg8lJ4dpoJGkyCDrPXhB4uiDJfaemWYEQaAm8o4";
-    //eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IlNlcmdpbyBBbmRyZXMiLCJpYXQiOjEwMDM4MTEzMzJ9.5v_g8lJ-_4dpoJGkyCDrPXhB4uiDJfaemWYEQaAm8o4
+
+    public static final String ACCESS_TOKEN_SECRET = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IlNlcmdpbyBQZXJkb21vIiwiaWF0IjoxNTE2MjM5MDIyfQMNhL6bff8dq1WNHiqTmyHFbTRGhR3hzspfmlWs9Bw";
+
 
     // Método para agregar el token.
     public String generateToken(String userName){
@@ -30,18 +30,25 @@ public class JwtUtil {
     }
 
     private String createToken(Map<String, Object> claims, String userName){
-        return Jwts.builder()
-                .setClaims(claims)
-                .setSubject(userName)
-                .setIssuedAt(new Date(System.currentTimeMillis()))
-                .setExpiration(new Date(System.currentTimeMillis() + 10000 * 60 * 30)) // Fecha de caducidad. -  30 minutos apartir de ahora.
-                // Firmando el tocken
-                .signWith(getSignKey(), SignatureAlgorithm.HS256).compact(); // getSignKey es un método para obtener la clave de inicio de sesión.
+        try{
+            return Jwts.builder()
+                    .setClaims(claims)
+                    .setSubject(userName)
+                    .setIssuedAt(new Date(System.currentTimeMillis()))
+                    .setExpiration(new Date(System.currentTimeMillis() + 10000 * 60 * 30)) // Fecha de caducidad. -  30 minutos apartir de ahora.
+                    // Firmando el tocken
+                    .signWith(getSignKey(), SignatureAlgorithm.HS256).compact(); // getSignKey es un método para obtener la clave de inicio de sesión.
+        } catch(Exception e) {
+            throw  new RuntimeException("Error generating token", e);
+        }
+
     }
+
+
 
     // Método para obtener la llave de inicio de sesión:
     private Key getSignKey() {
-        byte[] keyBytes = Decoders.BASE64.decode(SECRET);
+        byte[] keyBytes = Decoders.BASE64.decode(ACCESS_TOKEN_SECRET);
         return Keys.hmacShaKeyFor(keyBytes);
     }
 
@@ -57,7 +64,12 @@ public class JwtUtil {
     }
 
     private Claims extractAllClaims(String token){
-        return Jwts.parserBuilder().setSigningKey(getSignKey()).build().parseClaimsJws(token).getBody();
+        return Jwts
+                .parserBuilder()
+                .setSigningKey(getSignKey())
+                .build()
+                .parseClaimsJws(token)
+                .getBody();
     }
 
     // Método para comprobar la caducidad de nuestro JWT.
@@ -75,11 +87,7 @@ public class JwtUtil {
     // Validando nuestro token
     public Boolean validateToken (String token, UserDetails userDetails){
         final String username =  extractUsername(token);
-        return (username.equals(userDetails.getUsername()) && isTokenExpired(token));
+        return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
     }
-
-
-
-
 
 }

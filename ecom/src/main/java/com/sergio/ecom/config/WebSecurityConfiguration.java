@@ -1,6 +1,4 @@
 package com.sergio.ecom.config;
-
-
 import com.sergio.ecom.filters.JwtRequestFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
