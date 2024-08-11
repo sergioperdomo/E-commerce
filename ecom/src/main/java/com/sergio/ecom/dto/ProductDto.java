@@ -1,2 +1,24 @@
-package com.sergio.ecom.dto;public class ProductDto {
+package com.sergio.ecom.dto;
+
+import jakarta.persistence.*;
+import lombok.Data;
+import org.springframework.web.multipart.MultipartFile;
+
+@Data
+public class ProductDto {
+
+    private Long id;
+
+    private String name;
+    private Long price;
+
+
+    private String description;
+
+    private byte[] byteImg;
+
+    private Long categoryId;
+
+    private MultipartFile img;
+
 }
