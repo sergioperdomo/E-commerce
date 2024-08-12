@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { AdminService } from '../../service/admin.service';
+import { HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-post-category',
@@ -29,6 +30,9 @@ export class PostCategoryComponent {
 
   addCagetory(): void {
     if (this.categoryForm.valid){
+
+      // const headers = new HttpHeaders({'Authorization': 'Bearer ${token}'})
+
       this.adminService.addCategory(this.categoryForm.value).subscribe((res) => {
         if (res.id != null) {
           this.snackBar.open('Category Posted Successfully!', 'Close', {
