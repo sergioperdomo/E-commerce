@@ -3,7 +3,6 @@ package com.sergio.ecom.controller.admin;
 import com.sergio.ecom.dto.ProductDto;
 import com.sergio.ecom.services.admin.adminproduct.AdminProductService;
 import lombok.RequiredArgsConstructor;
-import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,6 +13,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/admin")
 @RequiredArgsConstructor
+@CrossOrigin
 public class AdminProductController {
 
     private final AdminProductService adminProductService;

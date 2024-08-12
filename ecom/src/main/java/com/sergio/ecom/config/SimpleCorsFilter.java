@@ -1,17 +1,22 @@
 package com.sergio.ecom.config;
 
-import com.sergio.ecom.entity.User;
-import jakarta.servlet.*;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+import jakarta.servlet.Filter;
+import jakarta.servlet.FilterChain;
+import jakarta.servlet.FilterConfig;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.ServletRequest;
+import jakarta.servlet.ServletResponse;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 @Component
 @Order(Ordered.HIGHEST_PRECEDENCE) // @Order y Ordered.HIGHEST_PRECEDENCE Cuando aplicas la anotación @Order con el valor Ordered.HIGHEST_PRECEDENCE, estás indicando que el bean anotado debe tener la más alta prioridad de ejecución. En términos prácticos, esto significa que se ejecutará antes que otros beans con una prioridad más baja.
@@ -23,7 +28,7 @@ public class SimpleCorsFilter implements Filter {
     @Value("${app.client.url}")
     private String clientAppUrl = "";
 
-    public SimpleCorsFilter(){}
+    public SimpleCorsFilter(){ /* TODO document why this constructor is empty */ }
 
 
     @Override
@@ -31,7 +36,6 @@ public class SimpleCorsFilter implements Filter {
             throws IOException, ServletException {
         HttpServletResponse response = (HttpServletResponse) res;
         HttpServletRequest request = (HttpServletRequest)  req;
-        Map<String, String> map = new HashMap<>();
         String originHeader = request.getHeader("origin");
         response.setHeader("Access-Control-Allow-Origin", originHeader);
         response.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT, OPTIONS, DELETE");

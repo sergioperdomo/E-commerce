@@ -1,28 +1,25 @@
 package com.sergio.ecom.utils;
 
+import java.security.Key;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.function.Function;
+
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.stereotype.Component;
+
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
-import org.aspectj.apache.bcel.classfile.annotation.RuntimeAnnos;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.stereotype.Component;
-import java.security.Key;
-import java.security.SecureRandom;
-import java.util.Base64;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.function.Function;
 
 @Component
 public class JwtUtil {
 
 
     public static final String ACCESS_TOKEN_SECRET = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IlNlcmdpbyBQZXJkb21vIiwiaWF0IjoxNTE2MjM5MDIyfQMNhL6bff8dq1WNHiqTmyHFbTRGhR3hzspfmlWs9Bw";
-    private static final long TOKEN_EXPIRATION_TIME = 30L * 60 * 1000;
-
 
     // Método para agregar el token.
     public String generateToken(String userName){
@@ -40,14 +37,11 @@ public class JwtUtil {
                     .signWith(getSignKey(), SignatureAlgorithm.HS256).compact(); // getSignKey es un método para obtener la clave de inicio de sesión.
     }
 
-
-
     // Método para obtener la llave de inicio de sesión:
     private Key getSignKey() {
         byte[] keyBytes = Decoders.BASE64.decode(ACCESS_TOKEN_SECRET);
         return Keys.hmacShaKeyFor(keyBytes);
     }
-
 
     // Método para extraer el nombre del usuario de nuestro TOKEN.
     public String extractUsername(String token){

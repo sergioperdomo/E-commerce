@@ -14,6 +14,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/admin")
 @RequiredArgsConstructor
+@CrossOrigin
 public class AdminCategoryController {
 
     private final CategoryService categoryService;
