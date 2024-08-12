@@ -8,7 +8,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { DemoAngularMaterialModuleTsComponent } from '../DemoAngularMaterialModule';
 import { PostCategoryComponent } from './components/post-category/post-category.component';
-// import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { PostProductComponent } from './components/post-product/post-product.component';
 
 
 @NgModule({
@@ -16,6 +16,7 @@ import { PostCategoryComponent } from './components/post-category/post-category.
     AdminComponent,
     DashboradAdminComponent,
     PostCategoryComponent,
+    PostProductComponent,
     // DashboardComponent
   ],
   imports: [

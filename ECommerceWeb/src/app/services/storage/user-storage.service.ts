@@ -68,7 +68,7 @@ export class UserStorageService {
   }
 
    // Método que nos permite verificar si el usuario o persona que inicio sesión es cliente o no.
-   static isCustomerLoggedIn(): boolean {
+  static isCustomerLoggedIn(): boolean {
     if (this.getToken === null){
       return false;
     }
