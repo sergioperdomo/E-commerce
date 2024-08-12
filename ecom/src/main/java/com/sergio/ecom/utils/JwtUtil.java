@@ -21,6 +21,7 @@ public class JwtUtil {
 
 
     public static final String ACCESS_TOKEN_SECRET = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IlNlcmdpbyBQZXJkb21vIiwiaWF0IjoxNTE2MjM5MDIyfQMNhL6bff8dq1WNHiqTmyHFbTRGhR3hzspfmlWs9Bw";
+    private static final long TOKEN_EXPIRATION_TIME = 30L * 60 * 1000;
 
 
     // Método para agregar el token.
@@ -30,18 +31,13 @@ public class JwtUtil {
     }
 
     private String createToken(Map<String, Object> claims, String userName){
-        try{
-            return Jwts.builder()
+        return Jwts.builder()
                     .setClaims(claims)
                     .setSubject(userName)
                     .setIssuedAt(new Date(System.currentTimeMillis()))
                     .setExpiration(new Date(System.currentTimeMillis() + 10000 * 60 * 30)) // Fecha de caducidad. -  30 minutos apartir de ahora.
                     // Firmando el tocken
                     .signWith(getSignKey(), SignatureAlgorithm.HS256).compact(); // getSignKey es un método para obtener la clave de inicio de sesión.
-        } catch(Exception e) {
-            throw  new RuntimeException("Error generating token", e);
-        }
-
     }
 
 

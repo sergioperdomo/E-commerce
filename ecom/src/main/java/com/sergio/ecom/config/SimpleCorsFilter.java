@@ -27,12 +27,8 @@ public class SimpleCorsFilter implements Filter {
 
 
     @Override
-    public void init(FilterConfig filterConfig) throws ServletException {
-        Filter.super.init(filterConfig);
-    }
-
-    @Override
-    public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
+    public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)
+            throws IOException, ServletException {
         HttpServletResponse response = (HttpServletResponse) res;
         HttpServletRequest request = (HttpServletRequest)  req;
         Map<String, String> map = new HashMap<>();
@@ -47,6 +43,11 @@ public class SimpleCorsFilter implements Filter {
         } else {
             chain.doFilter(req, res);
         }
+    }
+
+    @Override
+    public void init(FilterConfig filterConfig) throws ServletException {
+        Filter.super.init(filterConfig);
     }
 
     @Override
