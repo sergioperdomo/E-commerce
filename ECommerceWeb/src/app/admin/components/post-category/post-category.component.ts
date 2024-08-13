@@ -36,12 +36,12 @@ export class PostCategoryComponent {
       this.adminService.addCategory(this.categoryForm.value).subscribe((res) => {
         if (res.id != null) {
           this.snackBar.open('Category Posted Successfully!', 'Close', {
-            duration: 5000
+            duration: 3000
           });
           this.router.navigateByUrl('/admin/dashboard');
         } else {
           this.snackBar.open(res.message, 'Close', {
-            duration: 5000,
+            duration: 3000,
             panelClass: 'error-snackbar'
           });
         }
