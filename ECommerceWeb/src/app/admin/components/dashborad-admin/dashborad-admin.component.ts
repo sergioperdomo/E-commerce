@@ -21,7 +21,7 @@ export class DashboradAdminComponent {
     this.products = [];
     this.adminService.getAllProducts().subscribe(res => {
       res.forEach(element => {
-        element.processedImg = 'data:image/jpeg;bases64' + element.byteImg;
+        element.processedImg = 'data:image/png;bases64,' + element.byteImg;
         this.products.push(element);
       });
     })
