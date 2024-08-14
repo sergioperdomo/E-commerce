@@ -25,7 +25,12 @@ public class AdminProductServiceImpl implements AdminProductService {
         product.setName(productDto.getName());
         product.setDescription(productDto.getDescription());
         product.setPrice(productDto.getPrice());
-        product.setImg(productDto.getImg().getBytes());
+
+        if (productDto.getImg() != null) {
+            product.setImg(productDto.getImg().getBytes());
+        }
+
+
 
         Category category = categoryRepository.findById(productDto.getCategoryId()).orElseThrow();
 
