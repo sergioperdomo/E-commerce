@@ -17,11 +17,12 @@ public class Product {
     private Long id;
 
     private String name;
+
     private Long price;
 
     @Lob
     private String description;
-
+    
     @Lob
     @Column(columnDefinition = "longblob")
     private byte[] img;

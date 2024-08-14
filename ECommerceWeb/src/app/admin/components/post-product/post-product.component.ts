@@ -63,12 +63,12 @@ export class PostProductComponent {
       this.adminService.addProduct(formData).subscribe((res) => {
         if (res.id != null) {
           this.snackBar.open('Product Posted Successfully!', 'Close', {
-            duration: 5000
+            duration: 3000
           });
           this.router.navigateByUrl('/admin/dashboard');
         } else {
           this.snackBar.open(res.message, 'ERROR', {
-            duration: 5000
+            duration: 3000
           });
         }
       })
