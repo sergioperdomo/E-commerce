@@ -7,17 +7,18 @@
   .search-input {
     width: 300px;
     margin-right: 15px;
+    position: relative;
 
     input {
       padding-right: 40px;
     }
+  }
 
-    button {
-      position: absolute;
-      right: 8px;
-      top: 50%;
-      transform: translateY(-50%);
-    }
+  button {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translate(-50%);
   }
 }
 
@@ -66,7 +67,7 @@
         flex-wrap: wrap;
         margin-bottom: 10px;
 
-        .product-row {
+        .info-row {
           flex: 0 0 50%;
           display: flex;
           align-items: center;
@@ -96,7 +97,7 @@
   }
 }
 
-.empy-cart {
+.empty-cart {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -108,5 +109,4 @@
     color: #616161;
     margin-top: 10px;
   }
-
 }
