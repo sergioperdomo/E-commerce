@@ -1,5 +1,15 @@
+<form [formGroup]="searchProductForm" class="search-form" (submit)="submitForm()">
+  <mat-form-field appearance="outline" class="search-input">
+    <mat-label>Enter Keyword to search</mat-label>
+    <input matInput formControlName="title">
+    <button mat-button matSuffix color="primary" [disabled]="searchProductForm.invalid">
+      <mat-icon class="mat-18">search</mat-icon>
+    </button>
+  </mat-form-field>
+</form>
+
 <div class="product-list">
-  <mat-card class="product-card" *ngFor="let product of products">
+  <mat-card class="product-card"  *ngFor="let product of products">
     <div class="product-image">
       <img [src]="product.processedImg" alt="product-image" />
     </div>
