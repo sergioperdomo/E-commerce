@@ -48,6 +48,6 @@ export class DashboardCustomerComponent {
     })
   }
 
-  addToCart(id: any){}
+  addProductToCart(id: any){}
 
 }
