@@ -1,2 +1,11 @@
-package com.sergio.ecom.dto;public class AddProductInCartDto {
+package com.sergio.ecom.dto;
+
+import lombok.Data;
+
+@Data
+public class AddProductInCartDto {
+
+    private Long userId;
+    private Long productId;
+
 }
