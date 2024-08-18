@@ -47,4 +47,7 @@ export class DashboardCustomerComponent {
       });
     })
   }
+
+  addToCart(id: any){}
+
 }
