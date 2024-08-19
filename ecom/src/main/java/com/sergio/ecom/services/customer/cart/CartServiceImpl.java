@@ -10,6 +10,7 @@ import com.sergio.ecom.repository.CartItemsRepository;
 import com.sergio.ecom.repository.OrderRepository;
 import com.sergio.ecom.repository.ProductRepository;
 import com.sergio.ecom.repository.UserRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,9 +37,12 @@ public class CartServiceImpl implements CartService{
 
     //Método de agregar producto al carrito.
     public ResponseEntity<?> addProductToCart(AddProductInCartDto addProductInCartDto){
-        Order activeOrder = orderRepository.findByUserIdAndStatus( addProductInCartDto.getUserId(), OrderStatus.Pending);
+        Order activeOrder = orderRepository.findByUserIdAndOrderStatus( addProductInCartDto.getUserId(), OrderStatus.Pending);
         // Pasando los artículos.
-        Optional<CartItems> optionalCartItems = cartItemsRepository.findByProductIdAndUserId( addProductInCartDto.getProductId(), activeOrder.getId(), addProductInCartDto.getUserId() );
+        Optional<CartItems> optionalCartItems = cartItemsRepository.findByProductIdAndUserId(
+                addProductInCartDto.getProductId(),
+                addProductInCartDto.getUserId()
+        );
 
         if (optionalCartItems.isPresent()){
             return ResponseEntity.status(HttpStatus.CONFLICT).body(null);
