@@ -42,6 +42,21 @@ export class CustomerService {
     );
   }
 
+  getCartByUserId(): Observable<any> {
+    const userId = UserStorageService.getUserId()
+
+    return this.http.get(BASIC_URL + `api/customer/cart/${userId}`, {
+      headers: this.createAuthorizationHeader(),
+    }).pipe(
+      catchError(error => {
+        // Maneja el error aquí
+        console.error("Error fetching  to cart:", error);
+        // Puedes retornar un Observable con un valor apropiado (ej: null)
+        return of(null);
+      })
+    );
+  }
+
   //  Método para autorizar
   private createAuthorizationHeader(): HttpHeaders {
     return new HttpHeaders().set(
