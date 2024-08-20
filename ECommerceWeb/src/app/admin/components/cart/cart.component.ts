@@ -11,7 +11,7 @@ import { CustomerService } from 'src/app/customer/services/customer.service';
 })
 export class CartComponent {
 
-  carItems: any[] = [];
+  cartItems: any[] = [];
   order: any;
 
   constructor(
@@ -27,12 +27,12 @@ export class CartComponent {
 
   // Método el cual permite llamar a nuestra API
   getCart(){
-    this.carItems = [];
+    this.cartItems = [];
     this.customerService.getCartByUserId().subscribe(res =>{
       this.order = res;
       res.cartItems.forEach(element => {
         element.processedImg = 'data:image/png;base64,'+ element.returnedImg;
-        this.carItems.push(element);
+        this.cartItems.push(element);
       })
     })
   }
