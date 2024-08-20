@@ -48,6 +48,9 @@ export class DashboardCustomerComponent {
     })
   }
 
-  addProductToCart(id: any){}
-
+  addProductToCart(id: any){
+    this.customerService.addToCart(id).subscribe(res => {
+      this.snackBar.open("Product added to cart successfully", "Close", {duration: 3000})
+    })
+  }
 }
