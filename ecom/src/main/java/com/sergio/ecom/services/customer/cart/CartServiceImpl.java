@@ -1,6 +1,8 @@
 package com.sergio.ecom.services.customer.cart;
 
 import com.sergio.ecom.dto.AddProductInCartDto;
+import com.sergio.ecom.dto.CartItemsDto;
+import com.sergio.ecom.dto.OrderDto;
 import com.sergio.ecom.entity.CartItems;
 import com.sergio.ecom.entity.Order;
 import com.sergio.ecom.entity.Product;
@@ -16,7 +18,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class CartServiceImpl implements CartService{
@@ -42,6 +46,7 @@ public class CartServiceImpl implements CartService{
         Optional<CartItems> optionalCartItems = cartItemsRepository.findByProductIdAndUserId(
                 addProductInCartDto.getProductId(),
                 addProductInCartDto.getUserId()
+                //activeOrder.getId()
         );
 
         if (optionalCartItems.isPresent()){
@@ -74,6 +79,22 @@ public class CartServiceImpl implements CartService{
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User or product not found.");
             }
         }
+    }
+
+    public OrderDto getCartByUserId(Long userId) {
+        Order activeOrder = orderRepository.findByUserIdAndOrderStatus( userId, OrderStatus.Pending);
+        List<CartItemsDto> cartItemsDtoList = activeOrder.getCartItems().stream().map(CartItems::getCartDto).collect(Collectors.toList());
+
+        OrderDto orderDto = new OrderDto();
+        orderDto.setAmount(activeOrder.getAmount());
+        orderDto.setId(activeOrder.getId());
+        orderDto.setOrderStatus(activeOrder.getOrderStatus());
+        orderDto.setDiscount(activeOrder.getDiscount());
+        orderDto.setTotalAmount(activeOrder.getTotalAmount());
+        orderDto.setCartItems(cartItemsDtoList);
+
+        return orderDto;
+
     }
 
 }
