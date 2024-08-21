@@ -10,6 +10,8 @@ import { DemoAngularMaterialModuleTsComponent } from '../DemoAngularMaterialModu
 import { PostCategoryComponent } from './components/post-category/post-category.component';
 import { PostProductComponent } from './components/post-product/post-product.component';
 import { CartComponent } from './components/cart/cart.component';
+import { PostCouponComponent } from './components/post-coupon/post-coupon.component';
+import { CouponsComponent } from './components/coupons/coupons.component';
 
 
 @NgModule({
@@ -19,6 +21,8 @@ import { CartComponent } from './components/cart/cart.component';
     PostCategoryComponent,
     PostProductComponent,
     CartComponent,
+    PostCouponComponent,
+    CouponsComponent,
     // DashboardComponent
   ],
   imports: [
