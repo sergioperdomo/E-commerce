@@ -1,4 +1,4 @@
-<div *ngIf="cartItems.length > 0; else emptyCart">
+<div  *ngIf="cartItems.length > 0; else emptyCart" class="containerFull">
   <div class="cart-container">
     <div class="cart-item" *ngFor="let item of cartItems">
       <div class="product-info">

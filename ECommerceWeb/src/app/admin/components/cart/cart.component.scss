@@ -1,7 +1,13 @@
+.containerFull{
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
 .cart-container {
   max-width: 600px;
-  margin: 0 auto;
-  padding: 16px;
+  margin: 3.5rem;
+  padding: 30px;
   border: 1px solid #ccc;
   border-radius: 8px;
   font-family: Arial, sans-serif;
