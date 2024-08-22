@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { catchError, Observable, of } from 'rxjs';
+import { catchError, Observable, of, throwError } from 'rxjs';
 import { UserStorageService } from 'src/app/services/storage/user-storage.service';
 
 const BASIC_URL = "http://localhost:8080/" ;
@@ -56,6 +56,22 @@ export class CustomerService {
       })
     );
   }
+
+  applyCoupon(code: any): Observable<any> {
+    const userId = UserStorageService.getUserId()
+
+    return this.http.get(BASIC_URL + `api/customer/coupon/${userId}/${code}`, {
+      headers: this.createAuthorizationHeader(),
+    }).pipe(
+      catchError(error => {
+        // Maneja el error aquí
+        console.error("Coupon applied successfully:", error);
+        // Puedes retornar un Observable con un valor apropiado (ej: null)
+        return throwError(() => new Error('Error applying coupon'))
+      })
+    );
+  }
+
 
   //  Método para autorizar
   private createAuthorizationHeader(): HttpHeaders {
