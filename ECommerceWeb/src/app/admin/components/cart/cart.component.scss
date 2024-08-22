@@ -68,7 +68,7 @@
   color: #ff4081;
 }
 
-.button.mat-raised-button {
+button.mat-raised-button {
   display: block;
   width: 100%;
   max-width: 200px;
@@ -80,11 +80,11 @@
   transition: background-color 0.3 ease;
 }
 
-.button.mat-raised-button:hover {
+button.mat-raised-button:hover {
   background-color: #1976d2;
 }
 
-.button.mat-raised-button:focus {
+button.mat-raised-button:focus {
   outline: none;
 }
 
@@ -105,7 +105,7 @@
 
 form {
   display: flex;
-  flex-direction: colum;
+  flex-direction: column;
 
   mat-form-field {
     margin-bottom: 20px;
