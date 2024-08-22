@@ -183,7 +183,7 @@ public class CartServiceImpl implements CartService{
             activeOrder.setAmount(activeOrder.getAmount() - product.getPrice());
             activeOrder.setTotalAmount(activeOrder.getTotalAmount() - product.getPrice());
 
-            cartItem.setQuantity(cartItem.getQuantity() - 1);
+            cartItem.setQuantity(cartItem.getQuantity() - 1 );
 
             // Verificamos si tenemos cupon en el pedido
             if (activeOrder.getCoupon() != null){
