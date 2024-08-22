@@ -163,4 +163,42 @@ public class CartServiceImpl implements CartService{
         return null;
     }
 
+
+    public OrderDto decreaseProductQuantity(AddProductInCartDto addProductInCartDto){
+        Order activeOrder = orderRepository.findByUserIdAndOrderStatus( addProductInCartDto.getUserId(), OrderStatus.Pending);
+        // Obtenemos el producto por medio del ID.
+        Optional<Product> optionalProduct = productRepository.findById(addProductInCartDto.getProductId());
+
+        //Obteniendo los artículos del carrito.
+        Optional<CartItems> optionalCartItem = cartItemsRepository.findByProductIdAndUserId(
+                addProductInCartDto.getProductId(),
+                addProductInCartDto.getUserId()
+        );
+
+        if (optionalProduct.isPresent() && optionalCartItem.isPresent()){
+            CartItems cartItem = optionalCartItem.get();
+            Product product = optionalProduct.get();
+
+            // Actualizando detalles
+            activeOrder.setAmount(activeOrder.getAmount() - product.getPrice());
+            activeOrder.setTotalAmount(activeOrder.getTotalAmount() - product.getPrice());
+
+            cartItem.setQuantity(cartItem.getQuantity() - 1);
+
+            // Verificamos si tenemos cupon en el pedido
+            if (activeOrder.getCoupon() != null){
+                //Calculo del monto del descuento y el monto neto
+                double discountAmount = ((activeOrder.getCoupon().getDiscount() / 100.0) * activeOrder.getTotalAmount());
+                double netAmount = activeOrder.getTotalAmount() - discountAmount;
+
+                activeOrder.setAmount((long)netAmount);
+                activeOrder.setDiscount((long)discountAmount);
+            }
+            cartItemsRepository.save(cartItem);
+            orderRepository.save(activeOrder);
+            return activeOrder.getOrderDto();
+        }
+        return null;
+    }
+
 }
