@@ -3,21 +3,17 @@ package com.sergio.ecom.services.customer.cart;
 import com.sergio.ecom.dto.AddProductInCartDto;
 import com.sergio.ecom.dto.CartItemsDto;
 import com.sergio.ecom.dto.OrderDto;
-import com.sergio.ecom.entity.CartItems;
-import com.sergio.ecom.entity.Order;
-import com.sergio.ecom.entity.Product;
-import com.sergio.ecom.entity.User;
+import com.sergio.ecom.entity.*;
 import com.sergio.ecom.enums.OrderStatus;
-import com.sergio.ecom.repository.CartItemsRepository;
-import com.sergio.ecom.repository.OrderRepository;
-import com.sergio.ecom.repository.ProductRepository;
-import com.sergio.ecom.repository.UserRepository;
+import com.sergio.ecom.exceptions.ValidationException;
+import com.sergio.ecom.repository.*;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -38,6 +34,9 @@ public class CartServiceImpl implements CartService{
 
     @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    private CouponRepository couponRepository;
 
     //Método de agregar producto al carrito.
     public ResponseEntity<?> addProductToCart(AddProductInCartDto addProductInCartDto){
@@ -93,8 +92,38 @@ public class CartServiceImpl implements CartService{
         orderDto.setTotalAmount(activeOrder.getTotalAmount());
         orderDto.setCartItems(cartItemsDtoList);
 
+        if (activeOrder.getCoupon() != null) {
+            orderDto.setCouponName(activeOrder.getCoupon().getName());
+        }
+
         return orderDto;
 
+    }
+
+    public OrderDto applyCoupon(Long userId, String code) {
+        Order activeOrder = orderRepository.findByUserIdAndOrderStatus( userId, OrderStatus.Pending);
+        Coupon coupon = couponRepository.findByCode(code).orElseThrow(() -> new ValidationException("Coupon not found"));
+
+        if (couponIsExpired(coupon)){
+            throw new ValidationException("Coupon has expired");
+        }
+
+        double discountAmount = ((coupon.getDiscount() / 100.0) * activeOrder.getTotalAmount());
+        double netAmount = activeOrder.getTotalAmount() - discountAmount;
+
+        activeOrder.setAmount((long)netAmount);
+        activeOrder.setDiscount((long)discountAmount);
+        activeOrder.setCoupon(coupon);
+
+        orderRepository.save(activeOrder);
+        return activeOrder.getOrderDto();
+    }
+
+    private boolean couponIsExpired(Coupon coupon){
+        Date currenDate = new Date();
+        Date expirationDate = coupon.getExpirationDate();
+
+        return expirationDate != null && currenDate.after(expirationDate);
     }
 
 }
