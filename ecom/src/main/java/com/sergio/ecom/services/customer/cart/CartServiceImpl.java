@@ -3,6 +3,7 @@ package com.sergio.ecom.services.customer.cart;
 import com.sergio.ecom.dto.AddProductInCartDto;
 import com.sergio.ecom.dto.CartItemsDto;
 import com.sergio.ecom.dto.OrderDto;
+import com.sergio.ecom.dto.PlaceOrderDto;
 import com.sergio.ecom.entity.*;
 import com.sergio.ecom.enums.OrderStatus;
 import com.sergio.ecom.exceptions.ValidationException;
@@ -16,6 +17,7 @@ import org.springframework.stereotype.Service;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -196,6 +198,32 @@ public class CartServiceImpl implements CartService{
             }
             cartItemsRepository.save(cartItem);
             orderRepository.save(activeOrder);
+            return activeOrder.getOrderDto();
+        }
+        return null;
+    }
+
+    public OrderDto placeOrder(PlaceOrderDto placeOrderDto){
+        Order activeOrder = orderRepository.findByUserIdAndOrderStatus( placeOrderDto.getUserId(), OrderStatus.Pending);
+        Optional<User> optionalUser = userRepository.findById(placeOrderDto.getUserId());
+
+        if (optionalUser.isPresent()){
+            activeOrder.setOrderDescription(placeOrderDto.getOrderDescription());
+            activeOrder.setAddress(placeOrderDto.getAddress());
+            activeOrder.setDate(new Date());
+            activeOrder.setOrderStatus(OrderStatus.Placed);
+            activeOrder.setTrackingId(UUID.randomUUID());
+
+            orderRepository.save(activeOrder);
+
+            Order order = new Order();
+            order.setAmount(0L);
+            order.setTotalAmount(0L);
+            order.setDiscount(0L);
+            order.setUser(optionalUser.get());
+            order.setOrderStatus(OrderStatus.Pending);
+            orderRepository.save(order);
+
             return activeOrder.getOrderDto();
         }
         return null;

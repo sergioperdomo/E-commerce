@@ -2,6 +2,7 @@ package com.sergio.ecom.services.customer.cart;
 
 import com.sergio.ecom.dto.AddProductInCartDto;
 import com.sergio.ecom.dto.OrderDto;
+import com.sergio.ecom.dto.PlaceOrderDto;
 import org.springframework.http.ResponseEntity;
 
 public interface CartService {
@@ -10,4 +11,5 @@ public interface CartService {
     OrderDto applyCoupon(Long userId, String code);
     OrderDto increaseProductQuantity(AddProductInCartDto addProductInCartDto);
     OrderDto decreaseProductQuantity(AddProductInCartDto addProductInCartDto);
+    OrderDto placeOrder(PlaceOrderDto placeOrderDto);
 }
