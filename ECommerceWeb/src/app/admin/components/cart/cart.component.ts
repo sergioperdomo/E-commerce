@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CustomerService } from 'src/app/customer/services/customer.service';
@@ -13,6 +13,7 @@ export class CartComponent {
 
   cartItems: any[] = [];
   order: any;
+  couponForm!: FormGroup;
 
   constructor(
     private customerService: CustomerService,
@@ -22,8 +23,28 @@ export class CartComponent {
   ) {}
 
   ngOnInit(): void {
+
+    this.couponForm = this.fb.group({
+      code: [null, [Validators.required]]
+    })
+
     this.getCart();
   }
+
+  applyCoupon(){
+    this.customerService.applyCoupon(this.couponForm.get(['code'])!.value).subscribe(res => {
+      this.snackbar.open("Coupon Applied Successfully", 'Close', {
+        duration:3000
+      });
+      this.getCart();
+    }, error => {
+      this.snackbar.open(error.error, 'Close', {
+        duration:3000
+      });
+    })
+  }
+
+
 
   // Método el cual permite llamar a nuestra API
   getCart(){
