@@ -58,4 +58,11 @@ export class CartComponent {
     })
   }
 
+  // Método para aumentar la cantidad
+  increaseQuantity(productId: any){
+    this.customerService.increaseProductQuantity(productId).subscribe(res => {
+      this.snackbar.open('Product Quantity Increased.', 'Close', { duration: 3000 })
+      this.getCart();
+    })
+  }
 }
