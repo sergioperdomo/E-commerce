@@ -2,6 +2,7 @@ package com.sergio.ecom.controller.customer;
 
 import com.sergio.ecom.dto.AddProductInCartDto;
 import com.sergio.ecom.dto.OrderDto;
+import com.sergio.ecom.dto.PlaceOrderDto;
 import com.sergio.ecom.exceptions.ValidationException;
 import com.sergio.ecom.services.customer.cart.CartService;
 import lombok.RequiredArgsConstructor;
@@ -48,6 +49,11 @@ public class CartController {
     @PostMapping("/deduction")
     public ResponseEntity<OrderDto> decreaseProductQuantity(@RequestBody AddProductInCartDto addProductInCartDto ) {
         return ResponseEntity.status(HttpStatus.CREATED).body(cartService.decreaseProductQuantity(addProductInCartDto));
+    }
+
+    @PostMapping("/placeOrder")
+    public ResponseEntity<OrderDto> placeOrder(@RequestBody PlaceOrderDto placeOrderDto ) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(cartService.placeOrder(placeOrderDto));
     }
 
 }
