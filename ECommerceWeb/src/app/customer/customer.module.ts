@@ -6,12 +6,14 @@ import { DashboardCustomerComponent } from './components/dashboard-customer/dash
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { DemoAngularMaterialModuleTsComponent } from '../DemoAngularMaterialModule';
+import { PlaceOrderComponent } from './components/place-order/place-order.component';
 
 
 @NgModule({
   declarations: [
     CustomerComponent,
-    DashboardCustomerComponent
+    DashboardCustomerComponent,
+    PlaceOrderComponent
   ],
   imports: [
     CommonModule,
