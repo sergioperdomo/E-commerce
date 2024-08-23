@@ -64,6 +64,12 @@ export class AdminService {
     })
   }
 
+  getPlacedPrders(): Observable<any>{
+    return this.http.get(BASIC_URL + 'api/admin/placedOrders', {
+      headers: this.createAuthorizationHeader(),
+    })
+  }
+
   //  Método para autorizar
   private createAuthorizationHeader(): HttpHeaders {
     return new HttpHeaders().set(
