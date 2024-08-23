@@ -12,14 +12,14 @@ import { MatDialog } from '@angular/material/dialog';
 })
 export class PlaceOrderComponent {
 
-  orderForm!:FormGroup;
+  orderForm!: FormGroup;
 
   constructor(
     private fb: FormBuilder,
+    private snackBar: MatSnackBar,
     private customerService: CustomerService,
-     private snackBar: MatSnackBar,
-     private router: Router,
-     private dialog: MatDialog
+    private router: Router,
+    public dialog: MatDialog
   ){}
 
   ngOnInit(){
