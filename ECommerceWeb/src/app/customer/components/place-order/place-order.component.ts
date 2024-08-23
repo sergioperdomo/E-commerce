@@ -26,18 +26,18 @@ export class PlaceOrderComponent {
     // Mencionamos los controladores
     this.orderForm = this.fb.group({
       address: [null, [Validators.required]],
-      ordeDescription: [null],
+      orderDescription: [null],
     })
   }
 
   placeOrder(){
     this.customerService.placeOrder(this.orderForm.value).subscribe(res => {
       if(res.id != null){
-        this.snackBar.open("Order placed successfully", "Close", { duration:3000 })
+        this.snackBar.open("Order placed successfully", "Close", { duration:3000 });
         this.router.navigateByUrl("/customer/my-orders");
         this.closeForm();
       } else {
-        this.snackBar.open("Something went wrong", "Close", { duration: 3000 } )
+        this.snackBar.open("Something went wrong", "Close", { duration: 3000 } );
       }
     })
   }
