@@ -93,6 +93,21 @@ export class CustomerService {
     );
   }
 
+  placeOrder(orderDto: any): Observable<any> {
+    orderDto.userId = UserStorageService.getUserId()
+
+    return this.http.post(BASIC_URL + `api/customer/place-order`, orderDto, {
+      headers: this.createAuthorizationHeader(),
+    }).pipe(
+      catchError(error => {
+        // Maneja el error aquí
+        console.error("Coupon applied successfully:", error);
+        // Puedes retornar un Observable con un valor apropiado (ej: null)
+        return throwError(() => new Error('Error applying coupon'))
+      })
+    );
+  }
+
 
   //  Método para autorizar
   private createAuthorizationHeader(): HttpHeaders {
