@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { PlaceOrderComponent } from 'src/app/customer/components/place-order/place-order.component';
 import { CustomerService } from 'src/app/customer/services/customer.service';
 
 @Component({
@@ -72,5 +73,10 @@ export class CartComponent {
       this.getCart();
     })
   }
+
+  placeOrder(){
+    this.dialog.open(PlaceOrderComponent);
+  }
+
 
 }
