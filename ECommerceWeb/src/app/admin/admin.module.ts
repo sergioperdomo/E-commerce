@@ -12,6 +12,7 @@ import { PostProductComponent } from './components/post-product/post-product.com
 import { CartComponent } from './components/cart/cart.component';
 import { PostCouponComponent } from './components/post-coupon/post-coupon.component';
 import { CouponsComponent } from './components/coupons/coupons.component';
+import { OrdersComponent } from './components/orders/orders.component';
 
 
 @NgModule({
@@ -23,6 +24,7 @@ import { CouponsComponent } from './components/coupons/coupons.component';
     CartComponent,
     PostCouponComponent,
     CouponsComponent,
+    OrdersComponent,
     // DashboardComponent
   ],
   imports: [
