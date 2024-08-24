@@ -20,6 +20,7 @@ export class OrdersComponent {
     this.getPlacedOrders();
   }
 
+  // Verificamos que este llegando el token y si esta llegando correctamente. Se descarta que el error sea producto del token.
   getPlacedOrders(){
     console.log('Token: ', UserStorageService.getToken()); // En la consola del naevagor se puede observar que si llega el token.
     this.adminService.getPlacedOrders().subscribe(res => {
