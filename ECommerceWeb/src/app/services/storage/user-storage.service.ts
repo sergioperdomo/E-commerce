@@ -60,7 +60,7 @@ export class UserStorageService {
 
   // Método que nos permite verificar si el usuario o persona que inicio sesión es administrdaor o no.
   static isAdminLoggedIn(): boolean {
-    if (this.getToken === null){
+    if (this.getToken() === null){
       return false;
     }
     const role: string = this.getUserRole();
@@ -69,7 +69,7 @@ export class UserStorageService {
 
    // Método que nos permite verificar si el usuario o persona que inicio sesión es cliente o no.
   static isCustomerLoggedIn(): boolean {
-    if (this.getToken === null){
+    if (this.getToken() === null){
       return false;
     }
     const role: string = this.getUserRole();
