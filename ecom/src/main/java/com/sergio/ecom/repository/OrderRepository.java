@@ -13,6 +13,8 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
     Order findByUserIdAndOrderStatus(Long userId, OrderStatus orderStatus);
 
     // Devuelve todos los pedidos
-    List<Order> findAllByOrderStatusIn (List<OrderStatus> orderStatuses);
+    List<Order> findAllByOrderStatusIn (List<OrderStatus> orderStatusList);
+
+    List<Order> findByUserIdAndOrderStatusIn (Long userId, List<OrderStatus> orderStatus);
 
 }
