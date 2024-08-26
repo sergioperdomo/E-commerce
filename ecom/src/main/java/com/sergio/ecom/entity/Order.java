@@ -1,5 +1,6 @@
 package com.sergio.ecom.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sergio.ecom.dto.OrderDto;
 import com.sergio.ecom.enums.OrderStatus;
 import jakarta.persistence.*;
@@ -35,7 +36,9 @@ public class Order {
     @JoinColumn(name = "coupon_id", referencedColumnName = "id")
     private Coupon coupon;
 
+
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "order") // Un pedido puede tener muchos artículos
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private List<CartItems> cartItems;
 
     public OrderDto getOrderDto(){

@@ -1,5 +1,6 @@
 package com.sergio.ecom.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.sergio.ecom.dto.CartItemsDto;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -28,8 +29,10 @@ public class CartItems { //Artículos del carrito
     @OnDelete(action = OnDeleteAction.CASCADE)
     private User user;
 
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "order_id")
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     private Order order;
 
     public CartItemsDto getCartDto() {
