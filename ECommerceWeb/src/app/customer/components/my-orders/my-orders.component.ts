@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CustomerService } from '../../services/customer.service';
 
 @Component({
   selector: 'app-my-orders',
@@ -6,5 +7,20 @@ import { Component } from '@angular/core';
   styleUrls: ['./my-orders.component.scss']
 })
 export class MyOrdersComponent {
+
+  myOrders: any;
+
+  constructor(private customerService: CustomerService){}
+
+  ngOnInit(){
+    this.getMyOrdes();
+  }
+
+  getMyOrdes() {
+    this.customerService.getOrdersByUserId().subscribe(res => {
+      this.myOrders = res;
+    })
+  }
+
 
 }
