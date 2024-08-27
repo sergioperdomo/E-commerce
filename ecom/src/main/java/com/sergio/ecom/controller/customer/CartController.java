@@ -10,6 +10,7 @@ import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -54,6 +55,7 @@ public class CartController {
     }
 
     @PostMapping("/placeOrder")
+    //@PreAuthorize("hasRole('ADMIN', 'CUSTOMER')")
     public ResponseEntity<OrderDto> placeOrder(@RequestBody PlaceOrderDto placeOrderDto ) {
         return ResponseEntity.status(HttpStatus.CREATED).body(cartService.placeOrder(placeOrderDto));
     }
