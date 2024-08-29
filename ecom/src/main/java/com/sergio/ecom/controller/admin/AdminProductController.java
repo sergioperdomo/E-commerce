@@ -1,7 +1,9 @@
 package com.sergio.ecom.controller.admin;
 
+import com.sergio.ecom.dto.FAQDto;
 import com.sergio.ecom.dto.ProductDto;
 import com.sergio.ecom.services.admin.adminproduct.AdminProductService;
+import com.sergio.ecom.services.admin.faq.FAQService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +19,7 @@ import java.util.List;
 public class AdminProductController {
 
     private final AdminProductService adminProductService;
+    private final FAQService faqService;
 
     @PostMapping("/product")
     public ResponseEntity<ProductDto> addProduct (@ModelAttribute ProductDto productDto) throws IOException {
@@ -44,5 +47,11 @@ public class AdminProductController {
         }
         return ResponseEntity.notFound().build();
     }
+
+    @PostMapping("/faq/{productId}")
+    public ResponseEntity<FAQDto> postFAQ(@PathVariable Long productId, @RequestBody FAQDto faqDto){
+        return ResponseEntity.status(HttpStatus.CREATED).body(faqService.postFAQ(productId,faqDto));
+    }
+
 
 }
