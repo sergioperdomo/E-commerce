@@ -13,6 +13,7 @@ import { CartComponent } from './components/cart/cart.component';
 import { PostCouponComponent } from './components/post-coupon/post-coupon.component';
 import { CouponsComponent } from './components/coupons/coupons.component';
 import { OrdersComponent } from './components/orders/orders.component';
+import { PostProductFaqComponent } from './components/post-product-faq/post-product-faq.component';
 
 
 @NgModule({
@@ -25,6 +26,7 @@ import { OrdersComponent } from './components/orders/orders.component';
     PostCouponComponent,
     CouponsComponent,
     OrdersComponent,
+    PostProductFaqComponent,
     // DashboardComponent
   ],
   imports: [
