@@ -1,6 +1,7 @@
 package com.sergio.ecom.utils;
 
 import java.security.Key;
+import java.util.Base64;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -19,7 +20,7 @@ import io.jsonwebtoken.security.Keys;
 public class JwtUtil {
 
 
-    public static final String ACCESS_TOKEN_SECRET = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IlNlcmdpbyBQZXJkb21vIiwiaWF0IjoxNTE2MjM5MDIyfQMNhL6bff8dq1WNHiqTmyHFbTRGhR3hzspfmlWs9Bw";
+    public static final String ACCESS_TOKEN_SECRET = Base64.getUrlEncoder().encodeToString(Keys.secretKeyFor(SignatureAlgorithm.HS256).getEncoded());
 
     // Método para agregar el token.
     public String generateToken(String userName){
@@ -39,7 +40,7 @@ public class JwtUtil {
 
     // Método para obtener la llave de inicio de sesión:
     private Key getSignKey() {
-        byte[] keyBytes = Decoders.BASE64.decode(ACCESS_TOKEN_SECRET);
+        byte[] keyBytes = Decoders.BASE64URL.decode(ACCESS_TOKEN_SECRET);
         return Keys.hmacShaKeyFor(keyBytes);
     }
 
