@@ -23,8 +23,8 @@ public class FAQServiceImpl implements FAQService {
         if (optionalProduct.isPresent()){
             FAQ faq = new FAQ();
 
-            faq.setQuestion(faq.getQuestion());
-            faq.setAnswer(faq.getAnswer());
+            faq.setQuestion(faqDto.getQuestion());
+            faq.setAnswer(faqDto.getAnswer());
             faq.setProduct(optionalProduct.get());
 
             return faqRepository.save(faq).getFAQDto();
