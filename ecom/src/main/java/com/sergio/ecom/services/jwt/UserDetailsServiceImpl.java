@@ -1,5 +1,7 @@
 package com.sergio.ecom.services.jwt;
 
+import com.sergio.ecom.entity.User;
+import com.sergio.ecom.entity.User;
 import com.sergio.ecom.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -21,7 +23,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<com.sergio.ecom.entity.User> optionalUser = userRepository.findFirstByEmail(username);
+        Optional<User> optionalUser = userRepository.findFirstByEmail(username);
 
         if (optionalUser.isEmpty()) throw new UsernameNotFoundException("Username not found", null);
         return new org.springframework.security.core.userdetails.User(optionalUser.get().getEmail(),optionalUser.get().getPassword(), new ArrayList<>());
