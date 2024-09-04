@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 const TOKEN = 'ecom-token';
-const USER = 'ecom.user';
+const USER = 'ecom-user';
 
 @Injectable({
   providedIn: 'root'
