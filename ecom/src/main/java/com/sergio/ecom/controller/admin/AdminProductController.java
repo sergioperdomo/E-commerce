@@ -5,6 +5,7 @@ import com.sergio.ecom.dto.ProductDto;
 import com.sergio.ecom.services.admin.adminproduct.AdminProductService;
 import com.sergio.ecom.services.admin.faq.FAQService;
 import lombok.RequiredArgsConstructor;
+import org.apache.coyote.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -53,5 +54,23 @@ public class AdminProductController {
         return ResponseEntity.status(HttpStatus.CREATED).body(faqService.postFAQ(productId,faqDto));
     }
 
+    @GetMapping("/product/{productId}")
+    public ResponseEntity<ProductDto> getProductById(@PathVariable Long productId){
+        ProductDto productDto = adminProductService.getProductById(productId);
+        if (productDto != null){
+            return ResponseEntity.ok(productDto);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 
+    @PutMapping("/product/{productId}")
+    public ResponseEntity<ProductDto> updateProduct(@PathVariable Long productId, @ModelAttribute ProductDto productDto) throws IOException {
+        ProductDto updateProduct = adminProductService.updateProduct(productId, productDto);
+        if (updateProduct != null){
+            return ResponseEntity.ok(updateProduct);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }
