@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 const TOKEN = 'ecom-token';
 const USER = 'ecom-user';
 
+// const BASIC_URL = "http://localhost:8080/";
 @Injectable({
   providedIn: 'root'
 })
