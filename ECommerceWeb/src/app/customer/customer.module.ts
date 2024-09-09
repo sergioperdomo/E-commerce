@@ -8,6 +8,8 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { DemoAngularMaterialModuleTsComponent } from '../DemoAngularMaterialModule';
 import { PlaceOrderComponent } from './components/place-order/place-order.component';
 import { MyOrdersComponent } from './components/my-orders/my-orders.component';
+import { ViewOrderedProductsComponent } from './components/view-ordered-products/view-ordered-products.component';
+import { ReviewOrderedProductComponent } from './components/review-ordered-product/review-ordered-product.component';
 
 
 @NgModule({
@@ -15,7 +17,9 @@ import { MyOrdersComponent } from './components/my-orders/my-orders.component';
     CustomerComponent,
     DashboardCustomerComponent,
     PlaceOrderComponent,
-    MyOrdersComponent
+    MyOrdersComponent,
+    ViewOrderedProductsComponent,
+    ReviewOrderedProductComponent
   ],
   imports: [
     CommonModule,
