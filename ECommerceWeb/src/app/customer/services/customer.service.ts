@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { catchError, Observable, of, throwError } from 'rxjs';
 import { UserStorageService } from 'src/app/services/storage/user-storage.service';
 
-const BASIC_URL = "http://localhost:8080/" ;
+const BASIC_URL = "http://localhost:8080/";
 
 @Injectable({
   providedIn: 'root'
@@ -104,6 +104,13 @@ export class CustomerService {
   getOrdersByUserId(): Observable<any> {
     const userId = UserStorageService.getUserId()
     return this.http.get(BASIC_URL + `api/customer/myOrders${userId}`, {
+      headers: this.createAuthorizationHeader(),
+    })
+
+  }
+
+  getOrderedProducts(orderId: number): Observable<any> {
+    return this.http.get(BASIC_URL + `api/customer/myOrders${orderId}`, {
       headers: this.createAuthorizationHeader(),
     })
 
