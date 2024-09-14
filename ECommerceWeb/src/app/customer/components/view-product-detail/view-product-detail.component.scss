@@ -56,7 +56,6 @@
   box-shadow:  0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 20px;
   margin-bottom: 20px;
-  text-align: center;
   display: flex;
 }
 
@@ -136,7 +135,8 @@
   color: #333;
 }
 
-.faq-card .question {
+.faq-card .question,
+.faq-card .answer {
   font-weight: bold;
   margin-bottom: 5px;
 }
