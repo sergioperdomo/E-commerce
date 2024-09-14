@@ -120,7 +120,12 @@ export class CustomerService {
     return this.http.post(BASIC_URL + `api/customer/review`, reviewDto, {
       headers: this.createAuthorizationHeader(),
     })
+  }
 
+  getProductDetailById(productId: number): Observable<any>{
+    return this.http.get(BASIC_URL + `api/customer/product/${productId}`, {
+      headers: this.createAuthorizationHeader(),
+    })
   }
 
   //  Método para autorizar
