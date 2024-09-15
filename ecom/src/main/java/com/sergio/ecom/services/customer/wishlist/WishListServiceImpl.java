@@ -1,6 +1,5 @@
 package com.sergio.ecom.services.customer.wishlist;
 
-
 import com.sergio.ecom.dto.WishListDto;
 import com.sergio.ecom.entity.Product;
 import com.sergio.ecom.entity.User;
@@ -11,7 +10,9 @@ import com.sergio.ecom.repository.WishListRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -34,6 +35,10 @@ public class WishListServiceImpl implements WishListService{
             return wishListRepository.save(wishList).getWishListDto();
         }
         return null;
+    }
+
+    public List<WishListDto> getWishListByUserId(Long userId) {
+        return wishListRepository.findAllByUserId(userId).stream().map(WishList::getWishListDto).collect(Collectors.toList());
     }
 
 }
