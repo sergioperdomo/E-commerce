@@ -134,6 +134,13 @@ export class CustomerService {
     })
   }
 
+  getWishListByUserId(): Observable<any> {
+    const userId = UserStorageService.getUserId()
+    return this.http.get(BASIC_URL + `api/customer/wishlist/${userId}`, {
+      headers: this.createAuthorizationHeader(),
+    })
+  }
+
   //  Método para autorizar
   private createAuthorizationHeader(): HttpHeaders {
     return new HttpHeaders().set(
