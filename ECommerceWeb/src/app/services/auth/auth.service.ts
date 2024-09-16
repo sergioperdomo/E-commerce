@@ -4,6 +4,7 @@ import { map, Observable } from 'rxjs';
 import { UserStorageService } from '../storage/user-storage.service';
 
 const BASIC_URL = "http://localhost:8080/"; // URL de nuestra aplicación BackEnd.
+const AUTH_HEADER = 'authorization';
 
 @Injectable({
   providedIn: 'root'
@@ -32,6 +33,10 @@ export class AuthService {
         return false;
       })
     )
+  }
+
+  getOrderByTrackingId(trackingId: number): Observable<any>{
+    return this.http.get(BASIC_URL + `order/${trackingId}`)
   }
 
 }
