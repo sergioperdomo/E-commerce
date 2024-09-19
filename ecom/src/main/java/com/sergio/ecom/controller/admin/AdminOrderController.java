@@ -1,6 +1,7 @@
 package com.sergio.ecom.controller.admin;
 
 
+import com.sergio.ecom.dto.AnalyticsResponse;
 import com.sergio.ecom.dto.OrderDto;
 import com.sergio.ecom.services.admin.adminOrder.AdminOrderService;
 import lombok.RequiredArgsConstructor;
@@ -34,4 +35,10 @@ public class AdminOrderController {
         }
         return  ResponseEntity.status(HttpStatus.OK).body(orderDto);
     }
+
+    @GetMapping("/order/analytics")
+    public ResponseEntity<AnalyticsResponse> getAnalytics(){
+        return ResponseEntity.ok(adminOrderService.calculateAnalytics());
+    }
+
 }
