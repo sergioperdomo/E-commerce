@@ -58,7 +58,7 @@ export class SignupComponent {
 
     this.authService.register(this.signupForm.value).subscribe(
       (response) => {
-        this.snackBar.open('Sign uo successful!', 'Close', { duration : 5000 });
+        this.snackBar.open('Sign-up successful!', 'Close', { duration : 5000 });
 
         // Navega al usuario a la página de inicio.
         this.router.navigateByUrl("/login");
