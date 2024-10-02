@@ -147,5 +147,4 @@ export class CustomerService {
       'Authorization', 'Bearer ' + UserStorageService.getToken()
     )
   }
-
 }
