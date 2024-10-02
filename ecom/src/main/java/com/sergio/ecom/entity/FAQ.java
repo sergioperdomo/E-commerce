@@ -27,7 +27,7 @@ public class FAQ {
 
         faqDto.setId(id);
         faqDto.setQuestion(question);
-        faqDto.setAnswer(question);
+        faqDto.setAnswer(answer);
         faqDto.setProductId(product.getId());
 
         return faqDto;
