@@ -1,16 +1,17 @@
-.containerFull{
-  display: flex;
-  justify-content: center;
-  align-content: center;
-}
+// .containerFull{
+//   display: flex;
+//   justify-content: center;
+//   align-content: center;
+// }
 
 .cart-container {
   max-width: 600px;
-  margin: 3.5rem;
+  // margin: 3.5rem;
   padding: 30px;
   border: 1px solid #ccc;
   border-radius: 8px;
   font-family: Arial, sans-serif;
+  margin: 1.2rem auto;
 }
 
 .cart-item {
@@ -136,9 +137,9 @@ form {
 
 
 .container {
-  max-width: 600px;
+  max-width: 660px;
   margin: 0 auto;
-  padding: 20px;
+  padding: .2rem;
 }
 
 @media (max-width: 600px){

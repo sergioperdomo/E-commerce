@@ -1,4 +1,4 @@
-<div  *ngIf="cartItems.length > 0; else emptyCart" class="containerFull">
+<div  *ngIf="cartItems.length > 0; else emptyCart" >
   <div class="cart-container">
     <div class="cart-item" *ngFor="let item of cartItems">
       <div class="product-info">
@@ -26,7 +26,6 @@
         </div>
       </div>
     </div>
-
     <div class="total-price">
       Total Amount: {{ order.totalAmount | currency }}
     </div>
@@ -40,7 +39,6 @@
       <button mat-raised-button color="primary" (click)="placeOrder()">Place Order</button>
     </div>
   </div>
-
   <div class="container" *ngIf="order.couponName == null">
     <form [formGroup]="couponForm" (ngSubmit)="applyCoupon()">
       <mat-form-field appearence="outline" class="form-field" >
