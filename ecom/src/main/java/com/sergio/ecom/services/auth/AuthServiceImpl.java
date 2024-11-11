@@ -26,7 +26,8 @@ public class AuthServiceImpl  implements AuthService{
     @Autowired
     private OrderRepository orderRepository;
 
-
+    /* este método se encarga de registrar un nuevo usuario, asignarle un rol, crear un pedido inicial asociado a ese usuario
+    y devolver un objeto que representa al usuario creado.*/
     public UserDto createUser(SignupRequest signupRequest){
         User user = new User();
 
@@ -51,12 +52,12 @@ public class AuthServiceImpl  implements AuthService{
         return userDto;
     }
 
-
+    /*Este método se utiliza para comprobar si ya existe un usuario en la base de datos con el correo electrónico proporcionado.*/
     public Boolean hasUserWithEmail(String email){
         return  userRepository.findFirstByEmail(email).isPresent();
     }
 
-    @PostConstruct
+    @PostConstruct /*se utiliza para indicar que un método debe ser ejecutado después de que se haya completado la inyección de dependencias en un bean*/
     // Método para crear la cuenta de administrador
     public void createAdminAccount(){
         User adminAccount = userRepository.findByRole(UserRole.ADMIN);
